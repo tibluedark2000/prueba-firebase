@@ -1,0 +1,31 @@
+name: Reset Firebase Points
+
+on:
+  schedule:
+    - cron: "0 0 20 * *" # Cada mes el día 20 a medianoche UTC
+
+jobs:
+  reset:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Create service account key file
+        env:
+          SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        run: echo "$SERVICE_ACCOUNT_KEY" > ./serviceAccountKey.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run reset script
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ./serviceAccountKey.json
+        run: node resetPoints.js
