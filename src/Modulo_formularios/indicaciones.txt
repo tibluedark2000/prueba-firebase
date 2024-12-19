@@ -1,0 +1,115 @@
+Nombre: Modulo formularios
+
+librerias utilizadas:
+npm i react-hook-form react-number-format @mui/icons-material @mui/material
+
+IngresoImagenCrop: npm i react-cropper
+
+Recursos: contiene la imagen por defecto de IngresarImagen
+
+Notas:
+El hooks useFormulario devuelve -> props que deben ser colocados en el componente
+formulario, este componente no esta ingresa en el hook useFormulario
+
+IngresoImagen retorna => blob
+
+Ejemplo:
+
+const FormularioEjemplo = () => {
+    const {obtenerEntidad, props, setEntidad} = useFormulario({valoresDefecto: {}})
+
+
+    const guardar = () => {
+        obtenerEntidad().then((entidad) => {
+            console.log(entidad)
+        })
+    }
+
+    const enviarDatos = () => {
+        setEntidad({
+            nombre: 'juan',
+            notas: 'estas son las notas',
+            edad: 'dos',
+            dinero: 100,
+            img: 'zrWSAi24HcxX3Vko42RN8ToctH-G0qlWd=s176-c-k-c0x00ffffff-no-rj'
+        })
+    }
+
+    return (
+        <Grid
+            container
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            sx={{p: 4}}
+        >
+
+
+            <Grid item container lg={12} sm={12} xs={12} sx={{justifyContent: 'flex-start'}}>
+                <Fomulario_Prueba props={props}/>
+            </Grid>
+
+
+            <Grid item container lg={12} sm={12} xs={12} sx={{justifyContent: 'flex-start'}}>
+                <Button
+
+                    onClick={() => guardar()}
+                    variant={'contained'}>enviar</Button>
+            </Grid>
+
+
+
+
+        </Grid>
+    )
+
+}
+export default FormularioEjemplo
+
+
+Ejemplo Formulario:
+
+const Fomulario_Prueba = ({...props}) => {
+
+
+    return (
+        <form noValidate>
+            <Grid
+                container
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                sx={{p: 4}}
+                spacing={2}
+            >
+
+
+                <Grid item container lg={12} sm={12} xs={12} sx={{justifyContent: 'center'}}>
+                    <IngresoTexto nombre={'Nombre'} dato={"nombre"} {...props} requerido={'El nombre es requerido*'}/>
+                </Grid>
+
+                <Grid item container lg={12} sm={12} xs={12} sx={{justifyContent: 'center'}}>
+                    <IngresoSelect nombre={'Edad'} dato={"edad"} type={'number'} {...props}
+                                   requerido={'La edad es requerida*'}/>
+                </Grid>
+
+                <Grid item container lg={12} sm={12} xs={12} sx={{justifyContent: 'center'}}>
+                    <IngresoDinero nombre={'Dinero'} dato={"dinero"}
+                                   requerido={'El monto no debe estar vacio*'}  {...props}/>
+                </Grid>
+
+                <Grid item container lg={12} sm={12} xs={12} sx={{justifyContent: 'center'}}>
+                    <IngresoTexto nombre={'Notas'} dato={"notas"} {...props} lineas={4} editable={false}/>
+                </Grid>
+
+                <Grid item container lg={12} sm={12} xs={12} sx={{justifyContent: 'center'}}>
+                    <IngresoImagen nombre={'Imagen'} dato={"img"} {...props} lineas={4} editable={false}/>
+                </Grid>
+
+
+            </Grid>
+        </form>
+    )
+
+}
+export default Fomulario_Prueba

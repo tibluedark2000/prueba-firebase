@@ -1,0 +1,1 @@
+export const LINKPAGINA = 'https://foxplor.app/'

@@ -1,0 +1,42 @@
+Nombre: Modulo Loaders
+
+Librerias: npm i @mui/material @emotion/react @emotion/styled @mui/icons-material @mui/system
+
+Dependencias: estilos.css
+
+Ejemplo:
+
+
+const Dialogo_Producto = ({cerrar, realizado, datos}) => {
+    const {Cargador, abrirCargador, cerrarCargador} = useLoaders({
+        logo: logo,
+    })
+
+
+    const guardar = () => {
+
+            abrirCargador('Subiendo Datos')
+            cerrarCargador()
+
+    }
+
+
+
+    return (
+
+        <Grid
+            container
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+        >
+
+            <Cargador/>
+
+
+        </Grid>
+
+    )
+
+}
+export default Dialogo_Producto
