@@ -3,9 +3,9 @@ name: Reset Firebase Points
 on:
   schedule:
     # - cron: "0 5 20 * *" # Ejecuta a las 12:00 AM hora de Colombia (5:00 AM UTC)
-    - cron: "30 14 20 * *" # Ejecuta a las 12:00 AM hora de Colombia (9:30 AM UTC)
+    - cron: "40 14 20 * *" # Ejecuta a las 12:00 AM hora de Colombia (9:30 AM UTC)
 
-  workflow_dispatch:
+  # workflow_dispatch:
 
 jobs:
   reset:
@@ -22,13 +22,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-      
+
       - name: Create service account key file
         env:
           SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
         run: echo "$SERVICE_ACCOUNT_KEY" > ./serviceAccountKey.json
-
-      
 
       - name: Run reset script
         env:
