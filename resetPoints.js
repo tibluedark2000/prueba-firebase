@@ -20,9 +20,16 @@ async function resetPoints() {
             puntos_izquierdo: 0,
             puntos_derecho_restantes: 0,
             puntos_izquierdo_restantes: 0,
-            tramo_derecho: userData.tramo_derecho.map((tramo) => ({ ...tramo, puntos: 0 })),
-            tramo_izquierdo: userData.tramo_izquierdo.map((tramo) => ({ ...tramo, puntos: 0 })),
         };
+        // Solo actualizar tramo_derecho si tiene al menos un elemento
+        if (userData.tramo_derecho && userData.tramo_derecho.length > 0) {
+            resetData.tramo_derecho = userData.tramo_derecho.map((tramo) => ({ ...tramo, puntos: 0 }));
+        }
+
+        // Solo actualizar tramo_izquierdo si tiene al menos un elemento
+        if (userData.tramo_izquierdo && userData.tramo_izquierdo.length > 0) {
+            resetData.tramo_izquierdo = userData.tramo_izquierdo.map((tramo) => ({ ...tramo, puntos: 0 }));
+        }
 
         batch.update(usuariosRef.doc(doc.id), resetData);
     });
