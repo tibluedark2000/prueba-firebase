@@ -2,7 +2,7 @@ name: Reset Firebase Points
 
 on:
   schedule:
-    - cron: "0 0 20 * *" # Cada mes el día 20 a medianoche UTC
+    - cron: "0 5 20 * *" # Ejecuta a las 12:00 AM hora de Colombia (5:00 AM UTC)
 
 jobs:
   reset:
